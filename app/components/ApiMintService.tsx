@@ -19,7 +19,7 @@ export default function ApiMintService({
 
   const handleMint = async () => {
     if (!receiverAddress) {
-      setError('Receiver address is required');
+      console.error('Receiver address is missing');
       return;
     }
 

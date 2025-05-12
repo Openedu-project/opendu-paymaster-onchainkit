@@ -22,8 +22,8 @@ import { Transaction } from '../models/transaction';
 
 export default function MintPage() {
   const { address, isConnected } = useAccount();
-  const [tokenUri, setTokenUri] = useState('https://brown-interesting-eel-440.mypinata.cloud/ipfs/bafkreihh5xmatthhijqeyf7ga2je6q7tox757ss7jhdjkmcqazrmohuwnu');
-  const [receiverAddress, setReceiverAddress] = useState('');
+  // Use fixed values for tokenUri and receiverAddress
+  const tokenUri = 'https://brown-interesting-eel-440.mypinata.cloud/ipfs/bafkreihh5xmatthhijqeyf7ga2je6q7tox757ss7jhdjkmcqazrmohuwnu';
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   const handleTransactionComplete = (transaction: Transaction) => {
@@ -72,37 +72,12 @@ export default function MintPage() {
             <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold mb-4">Mint an NFT with Sponsored Gas</h2>
               <p className="mb-6 text-gray-600 dark:text-gray-300">
-                This implementation uses the OpenEdu Paymaster API to mint NFTs with sponsored gas.
+                Click the button below to mint an NFT with gas fees sponsored by OpenEdu Paymaster API.
               </p>
-
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-1">Token URI</label>
-                <input
-                  type="text"
-                  value={tokenUri}
-                  onChange={(e) => setTokenUri(e.target.value)}
-                  className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
-                  placeholder="Enter token URI"
-                />
-              </div>
-
-              <div className="mb-6">
-                <label className="block text-sm font-medium mb-1">Receiver Address</label>
-                <input
-                  type="text"
-                  value={receiverAddress || address || ''}
-                  onChange={(e) => setReceiverAddress(e.target.value)}
-                  className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
-                  placeholder="Enter receiver address"
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  This is the address that will receive the NFT.
-                </p>
-              </div>
 
               <ApiMintService
                 tokenUri={tokenUri}
-                receiverAddress={receiverAddress || address}
+                receiverAddress={address}
                 onTransactionComplete={handleTransactionComplete}
               />
             </div>
